@@ -650,6 +650,13 @@ const struct tp_handler_item tp_handler_list[] = {
 	{ "core_flush_damage", core_flush_damage },
 	{ "renderer_gpu_begin", renderer_gpu_begin},
 	{ "renderer_gpu_end", renderer_gpu_end},
+
+	{ "page flip", core_repaint_finished },
+	{ "output_repaint_timer_handler", core_repaint_begin },
+	{ "output_render after send frame", core_repaint_posted },
+	{ "apply damage", core_commit_damage },
+	{ "render surface", core_flush_damage },
+
 	{ NULL, NULL }
 };
 
