@@ -273,6 +273,8 @@ core_repaint_finished(struct parse_context *ctx, const struct timespec *ts,
 	if (!og)
 		return ERROR;
 
+	struct timespec vblank_ts = get_timespec_from_timepoint(ctx, jobj, "vblank");
+
 	og->last_finished = *ts;
 
 	if (timespec_is_valid(&og->last_posted)) {
@@ -285,8 +287,7 @@ core_repaint_finished(struct parse_context *ctx, const struct timespec *ts,
 		if (!lb)
 			return ERROR;
 
-		/* XXX: use the real vblank time, not ts */
-		vbl = vblank_create(&og->vblanks, ts);
+		vbl = vblank_create(&og->vblanks, &vblank_ts);
 		if (!vbl)
 			return ERROR;
 
